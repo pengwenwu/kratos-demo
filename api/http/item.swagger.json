@@ -1,0 +1,121 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "item.proto",
+        "version": "1"
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/item/list": {
+            "get": {
+                "summary": "/item/list",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.item.v1.ItemGetListResp"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "store_id",
+                        "description": "店铺id",
+                        "in": "query",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page_num",
+                        "description": "页号，0开始",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page_size",
+                        "description": "分页大小",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "item.v1.Item"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        ".item.v1.ItemGetListReq": {
+            "type": "object",
+            "properties": {
+                "store_id": {
+                    "type": "integer",
+                    "description": "店铺id"
+                },
+                "page_num": {
+                    "type": "integer",
+                    "description": "页号，0开始"
+                },
+                "page_size": {
+                    "type": "integer",
+                    "description": "分页大小"
+                }
+            },
+            "required": [
+                "store_id"
+            ]
+        },
+        ".item.v1.ItemGetListResp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "appkey": {
+                    "type": "string"
+                },
+                "channel": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "photo": {
+                    "type": "string"
+                },
+                "detail": {
+                    "type": "string"
+                },
+                "last_dated": {
+                    "type": "string"
+                },
+                "dated": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

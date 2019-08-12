@@ -1,0 +1,42 @@
+// 定义项目 API 的 proto 文件 可以同时描述 gRPC 和 HTTP API
+// protobuf 文件参考:
+//  - https://developers.google.com/protocol-buffers/
+syntax = "proto3";
+
+// package 命名使用 {appid}.{version} 的方式, version 形如 v1, v2 ..
+package item.v1;
+
+option go_package = "http";
+option (gogoproto.goproto_getters_all) = false;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+
+service Item {
+    // `internal:"true"` 获取商品列表
+    rpc GetList(ItemGetListReq) returns (ItemGetListResp) {
+        option (google.api.http) = {
+            get:"/item/list"
+        };
+    };
+}
+
+message ItemGetListReq {
+    // 店铺id
+    int64 store_id = 1 [(gogoproto.moretags)='form:"store_id" validate:"required"'];
+    // 页号，0开始
+    int64 page_num = 2 [(gogoproto.moretags)='form:"page_num"'];
+    // 分页大小
+    int64 page_size = 3 [(gogoproto.moretags)='form:"page_size"'];
+}
+
+message ItemGetListResp {
+    int64 id = 1 [(gogoproto.jsontag) = 'id'];
+    string appkey = 2 [(gogoproto.jsontag) = 'appkey'];
+    int64 channel = 3 [(gogoproto.jsontag) = 'channel'];
+    string name = 4 [(gogoproto.jsontag) = 'name'];
+    string photo = 5 [(gogoproto.jsontag) = 'photo'];
+    string detail = 6 [(gogoproto.jsontag) = 'detail'];
+    string last_dated = 7 [(gogoproto.jsontag) = 'last_dated'];
+    string dated = 8 [(gogoproto.jsontag) = 'dated'];
+}
