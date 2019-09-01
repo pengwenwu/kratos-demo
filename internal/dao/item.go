@@ -9,7 +9,7 @@ import (
 )
 
 // ItemCount item count.
-func (d *Dao) OrderCount(c context.Context, arg *model.ArgItemList) (count int64, err error) {
+func (d *Dao) ItemCount(c context.Context, arg *model.ArgItemList) (count int64, err error) {
 
 	sqlStr := _itemCountSQL
 
@@ -22,7 +22,7 @@ func (d *Dao) OrderCount(c context.Context, arg *model.ArgItemList) (count int64
 }
 
 // ItemList item list.
-func (d *Dao) OrderList(c context.Context, arg *model.ArgItemList) (res []*model.Items, err error) {
+func (d *Dao) ItemList(c context.Context, arg *model.ArgItemList) (res []*model.Items, err error) {
 	sqlStr := _itemListSQL
 
 	if arg.Page <= 0 {

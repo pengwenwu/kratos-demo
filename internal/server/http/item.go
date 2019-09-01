@@ -10,7 +10,7 @@ func itemList(c *bm.Context) {
 	if err := c.Bind(arg); err != nil {
 		return
 	}
-	res, count, err :=  svc.OrderList(c, arg)
+	res, count, err :=  svc.ItemList(c, arg)
 	info := new(model.PageInfo)
 	info.Count = int(count)
 	info.Item = res
